@@ -1,0 +1,32 @@
+import java.sql.*;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+ class NServer
+{
+	public static void main(String args[]) 
+throws Exception
+	{
+               public static final int port = 3332;
+		Class.forName("com.mysql.jdbc.Driver");  
+                Connection con=DriverManager.getConnection("jdbc:mysql://localhost/mysql","root","root"); 
+                ServerSocket serverSocket=new ServerSocket(port);
+                Socket server = serverSocket.accept();
+                Statement st=null;
+                ResultSet rs=null;
+                String ip=(((InetSocketAddress) server.getRemoteSocketAddress()).getAddress()).toString().replace("/","");
+                st = con.createStatement();
+                            String SQL = "SELECT * FROM authenticate WHERE ipaddress='" + ip + "' ";
+                            rs = st.executeQuery(SQL);
+                                while (rs.next()) {
+                                 String ip1 = rs.getString("ipaddress");
+          }
+                                if (ip.equals(ip1)) {
+                                      System.out.println("Successful Login!\n----");
+                                    }
+                                else {
+                                     server.close();
+                                        }
+	            }
+        }
+ }
